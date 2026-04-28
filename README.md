@@ -1,4 +1,4 @@
-# 🫧 @Melody-Xz/Baileys
+# 🫧 @itsmelody/Baileys
 
 [![Logo](https://cdn.nexylight.xyz/files/rc5w03l7.jpeg)](https://github.com/Melody-Xz/Baileys)
 
@@ -70,12 +70,12 @@ Esta bifurcación está diseñada para uso en producción, priorizando la clarid
 ```json
 # NPM
 "dependencies": {
-   "@Melody-Xz/Baileys": "latest"
+   "@itsmelody/Baileys": "latest"
 }
 
 # GitHub
 "dependencies": {
-   "@Melody-Xz/Baileys": "github:Melody-Xz/baileys"
+   "@itsmelody/Baileys": "github:Melody-Xz/baileys"
 }
 ```
 
@@ -90,16 +90,16 @@ npm i github:Melody-Xz/baileys
 
 ```javascript
 // --- ESM
-import { makeWASocket } from '@Melody-Xz/Baileys'
+import { makeWASocket } from '@itsmelody/Baileys'
 
 // --- CJS (tested and working on Node.js 24 ✅)
-const { makeWASocket } = require('@Melody-Xz/Baileys')
+const { makeWASocket } = require('@itsmelody/Baileys')
 ```
 
 ### 🌐 Connect to WhatsApp (Quick Step)
 
 ```javascript
-import { makeWASocket, delay, DisconnectReason, useMultiFileAuthState } from '@Melody-Xz/Baileys'
+import { makeWASocket, delay, DisconnectReason, useMultiFileAuthState } from '@itsmelody/Baileys'
 import { Boom } from '@hapi/boom'
 import pino from 'pino'
 
@@ -163,7 +163,7 @@ connectToWhatsApp()
 > I highly recommend building your own data store, as keeping an entire chat history in memory can lead to excessive RAM usage.
 
 ```javascript
-import { makeWASocket, makeInMemoryStore, delay, DisconnectReason, useMultiFileAuthState } from '@Melody-Xz/Baileys'
+import { makeWASocket, makeInMemoryStore, delay, DisconnectReason, useMultiFileAuthState } from '@itsmelody/Baileys'
 import { Boom } from '@hapi/boom'
 import pino from 'pino'
 
@@ -262,7 +262,7 @@ sock.sendMessage(jid, {
    text: urlA + ' 👆🏻 Check it out!',
    linkPreview: {
       'matched-text': urlA,
-      title: '🌱 @Melody-Xz/Baileys',
+      title: '🌱 @itsmelody/Baileys',
       description: 'Underrated Baileys Fork',
       previewType: 0, // --- Use 1 for video playback in the link preview
       jpegThumbnail: fs.readFileSync('./path/to/image.jpg')
@@ -270,7 +270,7 @@ sock.sendMessage(jid, {
 })
 
 // --- Send a text message with a large link preview and favicon
-import { prepareWAMessageMedia } from '@Melody-Xz/Baileys'
+import { prepareWAMessageMedia } from '@itsmelody/Baileys'
 
 const urlB = 'https://github.com/Melody-Xz/Baileys#readme'
 
@@ -291,7 +291,7 @@ sock.sendMessage(jid, {
    text: urlB + ' 👆🏻 Check it out!',
    linkPreview: {
       'matched-text': urlB,
-      title: '🌱 @Melody-Xz/Baileys',
+      title: '🌱 @itsmelody/Baileys',
       description: 'Underrated Baileys Fork',
       previewType: 0,
       jpegThumbnail: fs.readFileSync('./path/to/image.jpg'),
@@ -429,7 +429,7 @@ const inviteCode = groupUrl
    ?.split('?')[0]
 
 const groupJid = '1201111111111@g.us'
-const groupName = '@Melody-Xz/Baileys'
+const groupName = '@itsmelody/Baileys'
 
 sock.sendMessage(jid, {
    groupInvite: {
@@ -454,7 +454,7 @@ sock.sendMessage(jid, {
       url: './path/to/image.jpg'
    },
    body: '👋🏻 Check my product here!',
-   footer: '@Melody-Xz/Baileys',
+   footer: '@itsmelody/Baileys',
    product: {
       currencyCode: 'IDR',
       description: '🛍️ Interesting product!',
@@ -627,7 +627,7 @@ sock.sendMessage(jid, {
 > You can easily add syntax highlighting by importing `tokenizeCode` directly from Baileys.
 
 ```javascript
-import { tokenizeCode } from '@Melody-Xz/Baileys'
+import { tokenizeCode } from '@itsmelody/Baileys'
 
 const language = 'javascript'
 const code = 'console.log("Hello, World!")'
@@ -834,7 +834,7 @@ sock.sendMessage(jid, {
    }],
    name: '📦 My Sticker Pack',
    publisher: 'Melody',
-   description: '@Melody-Xz/Baileys'
+   description: '@itsmelody/Baileys'
 }, {
    quoted: message
 })
@@ -848,7 +848,7 @@ sock.sendMessage(jid, {
 // --- Regular buttons message
 sock.sendMessage(jid, {
    text: '👆🏻 Buttons!',
-   footer: '@Melody-Xz/Baileys',
+   footer: '@itsmelody/Baileys',
    buttons: [{
       text: '👋🏻 SignUp',
       id: '#SignUp'
@@ -863,7 +863,7 @@ sock.sendMessage(jid, {
       url: './path/to/image.jpg'
    },
    caption: '👆🏻 Buttons and Native Flow!',
-   footer: '@Melody-Xz/Baileys',
+   footer: '@itsmelody/Baileys',
    buttons: [{
       text: '👋🏻 Rating',
       id: '#Rating'
@@ -901,7 +901,7 @@ sock.sendMessage(jid, {
 ```javascript
 sock.sendMessage(jid, {
    text: '📋 List!',
-   footer: '@Melody-Xz/Baileys',
+   footer: '@itsmelody/Baileys',
    buttonText: '📋 Select',
    title: '👋🏻 Hello',
    sections: [{
@@ -933,11 +933,11 @@ sock.sendMessage(jid, {
       url: './path/to/image.jpg'
    },
    caption: '🗄️️ Interactive!',
-   footer: '@Melody-Xz/Baileys',
+   footer: '@itsmelody/Baileys',
    optionText: '👉🏻 Select Options', // --- Optional, wrap all native flow into a single list
    optionTitle: '📄 Select Options', // --- Optional
    offerText: '🏷️ Newest Coupon!', // --- Optional, add an offer into message
-   offerCode: '@Melody-Xz/Baileys', // --- Optional
+   offerCode: '@itsmelody/Baileys', // --- Optional
    offerUrl: 'https://github.com/Melody-Xz/Baileys', // --- Optional
    offerExpiration: Date.now() + 3_600_000, // --- Optional
    nativeFlow: [{
@@ -949,7 +949,7 @@ sock.sendMessage(jid, {
       call: '628123456789'
    }, {
       text: '📋 Copy',
-      copy: '@Melody-Xz/Baileys'
+      copy: '@itsmelody/Baileys'
    }, {
       text: '🌐 Source',
       url: 'https://github.com/Melody-Xz/Baileys',
@@ -984,7 +984,7 @@ sock.sendMessage(jid, {
 // --- Carousel & Native Flow
 sock.sendMessage(jid, {
    text: '🗂️ Interactive with Carousel!',
-   footer: '@Melody-Xz/Baileys',
+   footer: '@itsmelody/Baileys',
    cards: [{
       image: {
          url: './path/to/image.jpg'
@@ -1003,7 +1003,7 @@ sock.sendMessage(jid, {
       caption: '🖼️ Image 2',
       footer: '🏷️ Pinterest',
       offerText: '🏷️ New Coupon!',
-      offerCode: '@Melody-Xz/Baileys',
+      offerCode: '@itsmelody/Baileys',
       offerUrl: 'https://github.com/Melody-Xz/Baileys',
       offerExpiration: Date.now() + 3_600_000,
       nativeFlow: [{
@@ -1019,7 +1019,7 @@ sock.sendMessage(jid, {
       optionText: '👉🏻 Select Options',
       optionTitle: '👉🏻 Select Options',
       offerText: '🏷️ New Coupon!',
-      offerCode: '@Melody-Xz/Baileys',
+      offerCode: '@itsmelody/Baileys',
       offerUrl: 'https://github.com/Melody-Xz/Baileys',
       offerExpiration: Date.now() + 3_600_000,
       nativeFlow: [{
@@ -1045,7 +1045,7 @@ sock.sendMessage(jid, {
       url: './path/to/image.jpg'
    },
    caption: '🫙 Template!',
-   footer: '@Melody-Xz/Baileys',
+   footer: '@itsmelody/Baileys',
    templateButtons: [{
       text: '👉🏻 Tap Here',
       id: '#Order'
@@ -1182,7 +1182,7 @@ sock.sendMessage(jid, {
       text: '📃 Built manually from scratch using the raw WhatsApp proto structure',
       contextInfo: {
          externalAdReply: {
-            title: '@Melody-Xz/Baileys',
+            title: '@itsmelody/Baileys',
             thumbnail: fs.readFileSync('./path/to/image.jpg'),
             sourceApp: 'whatsapp',
             showAdAttribution: true,
@@ -1331,7 +1331,7 @@ console.log('🔗 Pairing code', ':', customPairingCode)
 > Automatically use available image processing library: `sharp`, `@napi-rs/image`, or `jimp`
 
 ```javascript
-import { getImageProcessingLibrary } from '@Melody-Xz/Baileys'
+import { getImageProcessingLibrary } from '@itsmelody/Baileys'
 import { readFile } from 'fs/promises'
 
 const lib = await getImageProcessingLibrary()
@@ -1385,7 +1385,7 @@ console.dir(output, { depth: null })
 
 ```javascript
 // --- Create a new one
-sock.newsletterCreate('@Melody-Xz/Baileys', '📣 Fresh updates weekly')
+sock.newsletterCreate('@itsmelody/Baileys', '📣 Fresh updates weekly')
 
 // --- Get info
 const metadata = sock.newsletterMetadata('1231111111111@newsletter')
@@ -1410,10 +1410,10 @@ sock.newsletterDemote('1231111111111@newsletter', '6281111111111@s.whatsapp.net'
 sock.newsletterChangeOwner('1231111111111@newsletter', '6281111111111@s.whatsapp.net')
 
 // --- Update newsletter
-sock.newsletterUpdate('1231111111111@newsletter', { name: '@Melody-Xz/Baileys' })
+sock.newsletterUpdate('1231111111111@newsletter', { name: '@itsmelody/Baileys' })
 
 // --- Change name
-sock.newsletterUpdateName('1231111111111@newsletter', '📦 @Melody-Xz/Baileys')
+sock.newsletterUpdateName('1231111111111@newsletter', '📦 @itsmelody/Baileys')
 
 // --- Change description
 sock.newsletterUpdateDescription('1231111111111@newsletter', '📣 Fresh updates weekly')
@@ -1448,7 +1448,7 @@ sock.newsletterDelete('1231111111111@newsletter')
 
 ```javascript
 // --- Create a new one and add participants using their JIDs
-const group = sock.groupCreate('@Melody-Xz/Baileys', ['628123456789@s.whatsapp.net'])
+const group = sock.groupCreate('@itsmelody/Baileys', ['628123456789@s.whatsapp.net'])
 console.dir(group, { depth: null })
 
 // --- Get info
@@ -1483,7 +1483,7 @@ sock.groupParticipantsUpdate(jid, ['628123456789@s.whatsapp.net'], 'demote')
 sock.groupRequestParticipantsUpdate(jid, ['628123456789@s.whatsapp.net'], 'approve')
 
 // --- Change name
-sock.groupUpdateSubject(jid, '📦 @Melody-Xz/Baileys')
+sock.groupUpdateSubject(jid, '📦 @itsmelody/Baileys')
 
 // --- Change description
 sock.groupUpdateDescription(jid, 'Updated description')
@@ -1537,7 +1537,7 @@ const group = await sock.groupGetInviteInfo('https://chat.whatsapp.com/ABC123')
 console.log('👥 Got group info from link', ':', group)
 
 // --- Update bot member label
-sock.updateMemberLabel(jid, '@Melody-Xz/Baileys')
+sock.updateMemberLabel(jid, '@itsmelody/Baileys')
 ```
 
 #### 👤 Profile Management
@@ -1687,7 +1687,7 @@ sock.ev.on('settings.update', (update) => {})
 
 ### 🚀 Try the Bot
 
-A fast, lightweight, and modular WhatsApp bot built with [@Melody-Xz/Baileys](https://github.com/Melody-Xz/Baileys).
+A fast, lightweight, and modular WhatsApp bot built with [@itsmelody/Baileys](https://github.com/Melody-Xz/Baileys).
 Perfect for managing groups, moderating chats, and adding fun with quiz games and handy tools.
 
 👉🏻 [@Melody-Xz/starseed](https://github.com/Melody-Xz/starseed#readme)

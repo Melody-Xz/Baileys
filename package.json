@@ -1,24 +1,7 @@
 {
-   "name": "@Melody-Xz/baileys",
+   "name": "@itsmelody/baileys",
    "version": "0.2.5",
    "description": "Enhanced Baileys v7 with fixed newsletter media upload, plus support for interactive messages, albums, and more message types.",
-   "main": "lib/index.js",
-   "type": "module",
-   "scripts": {
-      "preinstall": "node ./engine-requirements.js"
-   },
-   "engines": {
-      "node": ">=20.0.0"
-   },
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/Melody-Xz/Baileys.git"
-   },
-   "files": [
-      "lib/**/*",
-      "WAProto/**/*",
-      "engine-requirements.js"
-   ],
    "keywords": [
       "automation",
       "baileys",
@@ -35,8 +18,28 @@
       "whatsapp-web"
    ],
    "homepage": "https://github.com/Melody-Xz/baileys#readme",
-   "author": "Lia Wynn",
+   "bugs": {
+      "url": "https://github.com/Melody-Xz/Baileys/issues"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Melody-Xz/Baileys.git"
+   },
    "license": "MIT",
+   "author": "Lia Wynn",
+   "type": "module",
+   "main": "lib/index.js",
+   "directories": {
+      "lib": "lib"
+   },
+   "files": [
+      "lib/**/*",
+      "WAProto/**/*",
+      "engine-requirements.js"
+   ],
+   "scripts": {
+      "preinstall": "node ./engine-requirements.js"
+   },
    "dependencies": {
       "@adiwajshing/keyed-db": "^0.2.4",
       "@cacheable/node-cache": "^1.4.0",
@@ -72,6 +75,9 @@
       "link-preview-js": {
          "optional": true
       }
+   },
+   "engines": {
+      "node": ">=20.0.0"
    },
    "packageManager": "yarn@4.9.2"
 }
