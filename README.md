@@ -1,89 +1,159 @@
-# 🫧 @itsmelody/Baileys
+<div align='center'>@itsmelody/Baileys - API de WhatsApp Web ✰</div>
 
-[![Logo](https://cdn.nexylight.xyz/files/rc5w03l7.jpeg)](https://github.com/Melody-Xz/Baileys)
+<div align="center">
+  <img src="https://cdn.nexylight.xyz/files/01ppdx.jpeg" alt="My Melody" width="300" style="border-radius: 20px;"/>
+</div>
 
-<p align="center">
-   Versión mejorada de Baileys v7 con carga de archivos multimedia para boletines informativos corregida, además de compatibilidad con mensajes interactivos, álbumes y otros tipos de mensajes.   
-</p>
+## Nota Importante
 
-### ✨ Highlights
+ꕤ Esta librería está basada en Baileys y ha sido editada por Melody para ofrecer máxima velocidad y estabilidad. No está afiliada con WhatsApp.
+> Credits to @itsliaaa 
 
+## Aviso de Responsabilidad
 
-Esta bifurcación está diseñada para uso en producción, priorizando la claridad y la seguridad:
+@itsmelody/Baileys y su desarrolladora no pueden ser responsables por mal uso. Por favor, usa esta librería para crear cosas lindas y positivas, no para spam o actividades maliciosas.
 
-- Sin ofuscación. Fácil de leer y auditar.
+## Instalación
 
-- Sin seguimiento automático de canales (boletines informativos).
+```bash
+# Versión estable
+npm install @itsmelody/Baileys
+# o
+yarn add @itsmelody/Baileys
 
-> [!NOTE]
-> 📄 Este proyecto se mantiene con un alcance limitado y no pretende reemplazar a Baileys.
+# Versión de desarrollo
+npm install github:itsmelody/Baileys
+# o
+yarn add github:itsmelody/Baileys
 
-### 🛠️ Ajustes internos
-- 🖼️ Se solucionó un problema que impedía el envío de contenido multimedia a los boletines informativos debido a un problema en el servidor.
+```
+## Novedades y Correcciones ✰
+ * 🖼️ Se solucionó un problema que impedía enviar contenido multimedia a los boletines informativos (Newsletters).
+ * 📁 Se reintrodujo `makeInMemoryStore` con una adaptación mínima de `ESM` y ajustes para Baileys v7.
+ * 📦 Gestión de procesos más segura: Se cambió la ejecución de FFmpeg de `exec` a `spawn`.
+ * 🗃️ Nuevo backend de imagen: Se agregó `@napi-rs/image` para un equilibrio perfecto entre rendimiento y compatibilidad.
+ * 💭 Compatibilidad para citar mensajes dentro de canales (Newsletters). **[NUEVO]**
+ * 🎀 Soporte para iconos de botones personalizados en mensajes interactivos. **[NUEVO]**
+## Compatibilidad Ampliada de Mensajes
+ * 🖼️ **Mensajes de Álbum:** Envía múltiples imágenes y videos en un solo bloque.
+ * 👥 **Estado de Grupo:** Soporte para mensajes de estado específicos de grupo.
+ * 👉🏻 **Mensajes Interactivos:** Botones, listas, flujos nativos, plantillas y carruseles.
+ * 🎞️ **Menciones en Status:** Publica y menciona en estados de WhatsApp.
+ * 📦 **Sticker Packs:** Envío de paquetes de stickers completos con metadatos.
+ * ✨ **Rich Response:** Mensajes con respuestas enriquecidas. **[NUEVO]**
+ * 🧾 **Code Blocks:** Mensajes con bloques de código y resaltado. **[NUEVO]**
+ * 📋 **Tablas:** Visualización de datos estructurados en tablas. **[NUEVO]**
+ * 💳 **Pagos:** Solicitudes, invitaciones, pedidos y facturas de pago.
+ * 📰 **Anuncios:** Envío simplificado de externalAdReply sin configuración manual.
+ 
+## Ejemplo Rápido (JavaScript)
+```javascript
+const { makeWASocket, useMultiFileAuthState } = require('@itsmelody/Baileys')
 
-- 📁 Se reintrodujo [`makeInMemoryStore`](#%EF%B8%8F-implementing-a-data-store) con una adaptación mínima de ESM y pequeños ajustes para Baileys v7.
+async function startBot() {
+    const { state, saveCreds } = await useMultiFileAuthState('session-melody')
+    
+    const sock = makeWASocket({
+        auth: state,
+        printQRInTerminal: true,
+        logger: require('pino')({ level: 'silent' })
+    })
 
-- 📦 Se cambió la ejecución de FFmpeg de `exec` a `spawn` para una gestión de procesos más segura.
+    sock.ev.on('connection.update', ({ connection }) => {
+        if(connection === 'open') console.log('¡Conectado con éxito! ✰')
+    })
 
-- 🗃️ Se agregó [`@napi-rs/image`](https://www.npmjs.com/package/@napi-rs/image) como backend de procesamiento de imágenes compatible en [`getImageProcessingLibrary()`](#%EF%B8%8F-image-processing), ofreciendo un equilibrio entre rendimiento y compatibilidad.
-
-### 📨 Gestión y compatibilidad de mensajes
-- 📩 Compatibilidad ampliada con mensajes para:
-
-- 🖼️ [Mensaje de álbum](#%EF%B8%8F-album-image--video)
-
-- 👤 [Mensaje de estado de grupo](#4%EF%B8%8F⃣-group-status)
-
-- 👉🏻 [Mensaje interactivo](#-sending-interactive-messages) (botones, listas, flujos nativos, plantillas, carruseles).  - 🎞️ [Mensaje de estado](#%EF%B8%8F-status-mention)
-
-- 📦 [Mensaje con paquete de stickers](#-sticker-pack)
-
-- ✨ [Mensaje con respuesta enriquecida](#-rich-response) **[NUEVO]**
-
-- 🧾 [Mensaje con bloques de código](#-message-with-code-block) **[NUEVO]**
-
-- 📋 [Mensaje con tabla](#-message-with-table) **[NUEVO]**
-
-- 💳 [Mensaje relacionado con pagos](#-sending-payment-messages) (solicitudes de pago, invitaciones, pedidos, facturas).
- - 📰 Se simplificó el envío de mensajes con miniaturas de anuncios mediante [`externalAdReply`](#3%EF%B8%8F⃣-external-ad-reply), sin necesidad de `contextInfo` manual.
-
-- 💭 Se agregó compatibilidad para citar mensajes dentro del canal (boletín informativo). **[NUEVO]**
-- 🎀 Se agregó compatibilidad con [icono de botón personalizado](#3%EF%B8%8F⃣-interactive). **[NUEVO]**
-
-### 🧩 Opciones de mensajes adicionales
-- 👁️ Se agregaron indicadores booleanos opcionales para el manejo de mensajes:
-
-- 🤖 [`ai`](#1%EF%B8%8F⃣-ai-icon) - Icono de IA en el mensaje
-
-- 📣 [`mentionAll`](#-mention) - Mencionar a todos los participantes del grupo sin requerir sus JID en `mentions` o `mentionedJid` **[NUEVO]**
-
-- 🔧 [`ephemeral`](#2%EF%B8%8F⃣-ephemeral), [`groupStatus`](#4%EF%B8%8F⃣-group-status), [`viewOnceV2`](#8%EF%B8%8F⃣-view-once-v2),  [`viewOnceV2Extension`](#9%EF%B8%8F⃣-view-once-v2-extension), [`interactiveAsTemplate`](#3%EF%B8%8F⃣-interactive) - Envoltorios de mensajes
-
-- 🔒 [`secureMetaServiceLabel`](#6%EF%B8%8F⃣-secure-meta-service-label) - Etiqueta de metadatos de servicio segura en el mensaje **[NUEVO]**
-
-- 📄 [`raw`](#5%EF%B8%8F⃣-raw) - Construye tu mensaje manualmente **(NO USAR PARA EXPLOTACIÓN)**
-
-### 📥 Installation
-
-- 📄 Via `package.json`
-
-```json
-# NPM
-"dependencies": {
-   "@itsmelody/Baileys": "latest"
+    sock.ev.on('creds.update', saveCreds)
 }
+startBot()
 
-# GitHub
-"dependencies": {
-   "@itsmelody/Baileys": "github:Melody-Xz/baileys"
+```
+
+## Características Principales
+
+· Optimizado para mayor velocidad y estabilidad
+
+· Mensajes multimedia
+
+· Comandos personalizados fáciles de implementar
+
+· Soporte para grupos y chats privados
+
+· Mensajes interactivos con botone
+
+## Funciones Técnicas
+
+· Conexión estable con reconexión automática
+
+· Sesiones persistentes que se guardan solitas
+
+· Manejo de errores con mensajes bonitos
+
+· Sincronización en tiempo real
+
+## Características Técnicas
+
+· Sin Selenium - Conexión directa vía WebSocket
+
+· Super eficiente - Ahorra mucha RAM
+
+· Soporte multi-dispositivo - Compatible con la versión web
+
+· Totalmente tipado - Con TypeScript y JavaScript
+
+· API completa - Todas las funciones de WhatsApp Web
+
+· Rendimiento optimizado - Código eficiente y rápido
+
+## Uso Básico
+
+Inicializar el Bot (JavaScript)
+
+```javascript
+const { makeWASocket, useMultiFileAuthState } = require('@Itsmelody/Baileys')
+
+const { state, saveCreds } = await useMultiFileAuthState('session-mymelody')
+const melody = makeWASocket({
+    auth: state,
+    printQRInTerminal: true
+})
+
+melody.ev.on('creds.update', saveCreds)
+```
+
+## Ejemplos de Funciones
+
+> Enviar Mensaje a Múltiples Chats
+
+```javascript
+async function broadcastMessage(jids, message) {
+    for(const jid of jids) {
+        await melody.sendMessage(jid, { text: message })
+    }
 }
 ```
 
-- ⌨️ Via terminal
+## Descargar Medios
 
-```bash
-# GitHub
-npm i github:Melody-Xz/baileys
+```javascript
+const { downloadMediaMessage } = require('@Itsmelody/Baileys')
+
+const stream = await downloadMediaMessage(message, 'buffer')
+// Guardar o procesar el medio
+```
+
+## Tipos para TypeScript
+
+```typescript
+import { WAMessage, WASocket } from '@Itsmelody/Baileys'
+
+interface MyBot extends WASocket {
+    // Tus tipos personalizados aquí
+}
+
+function handleMessage(message: WAMessage): void {
+    // Tu lógica de manejo de mensajes
+}
 ```
 
 #### 🧩 Import (ESM & CJS)
@@ -95,155 +165,6 @@ import { makeWASocket } from '@itsmelody/Baileys'
 // --- CJS (tested and working on Node.js 24 ✅)
 const { makeWASocket } = require('@itsmelody/Baileys')
 ```
-
-### 🌐 Connect to WhatsApp (Quick Step)
-
-```javascript
-import { makeWASocket, delay, DisconnectReason, useMultiFileAuthState } from '@itsmelody/Baileys'
-import { Boom } from '@hapi/boom'
-import pino from 'pino'
-
-// --- Connect with pairing code
-const myPhoneNumber = '6288888888888'
-
-const logger = pino({ level: 'silent' })
-
-const connectToWhatsApp = async () => {
-   const { state, saveCreds } = await useMultiFileAuthState('session')
-    
-   const sock = makeWASocket({
-      logger,
-      auth: state
-   })
-
-   sock.ev.on('creds.update', saveCreds)
-
-   sock.ev.on('connection.update', (update) => {
-      const { connection, lastDisconnect } = update
-      if (connection === 'connecting' && !sock.authState.creds.registered) {
-         await delay(1500)
-         const code = await sock.requestPairingCode(myPhoneNumber)
-         console.log('🔗 Pairing code', ':', code)
-      }
-      else if (connection === 'close') {
-         const shouldReconnect = new Boom(connection?.lastDisconnect?.error)?.output?.statusCode !== DisconnectReason.loggedOut
-         console.log('⚠️ Connection closed because', lastDisconnect.error, ', reconnecting ', shouldReconnect)
-         if (shouldReconnect) {
-            connectToWhatsApp()
-         }
-      }
-      else if (connection === 'open') {
-         console.log('✅ Successfully connected to WhatsApp')
-      }
-   })
-
-   sock.ev.on('messages.upsert', async ({ messages }) => {
-      for (const message of messages) {
-         if (!message.message) continue
-
-         console.log('🔔 Got new message', ':', message)
-         await sock.sendMessage(message.key.remoteJid, {
-            text: '👋🏻 Hello world'
-         })
-      }
-   })
-}
-
-connectToWhatsApp()
-```
-
-#### 🔐 Auth State
-
-> [!NOTE]
-> You can use the experimental `useSingleFileAuthState` as an alternative to `useMultiFileAuthState`. However, `useSingleFileAuthState` already includes an internal caching mechanism, so there is no need to wrap `state.keys` with `makeCacheableSignalKeyStore`.
-
-### 🗄️ Implementing Data Store
-
-> [!CAUTION]
-> I highly recommend building your own data store, as keeping an entire chat history in memory can lead to excessive RAM usage.
-
-```javascript
-import { makeWASocket, makeInMemoryStore, delay, DisconnectReason, useMultiFileAuthState } from '@itsmelody/Baileys'
-import { Boom } from '@hapi/boom'
-import pino from 'pino'
-
-const myPhoneNumber = '6288888888888'
-
-// --- Create your store path
-const storePath = './store.json'
-
-const logger = pino({ level: 'silent' })
-
-const connectToWhatsApp = async () => {
-   const { state, saveCreds } = await useMultiFileAuthState('session')
-    
-   const sock = makeWASocket({
-      logger,
-      auth: state
-   })
-
-   const store = makeInMemoryStore({
-      logger,
-      socket: sock
-   })
-
-   store.bind(sock.ev)
-
-   sock.ev.on('creds.update', saveCreds)
-
-   sock.ev.on('connection.update', (update) => {
-      const { connection, lastDisconnect } = update
-      if (connection === 'connecting' && !sock.authState.creds.registered) {
-         await delay(1500)
-         const code = await sock.requestPairingCode(myPhoneNumber)
-         console.log('🔗 Pairing code', ':', code)
-      }
-      else if (connection === 'close') {
-         const shouldReconnect = new Boom(connection?.lastDisconnect?.error)?.output?.statusCode !== DisconnectReason.loggedOut
-         console.log('⚠️ Connection closed because', lastDisconnect.error, ', reconnecting ', shouldReconnect)
-         if (shouldReconnect) {
-            connectToWhatsApp()
-         }
-      }
-      else if (connection === 'open') {
-         console.log('✅ Successfully connected to WhatsApp')
-      }
-   })
-
-   sock.ev.on('chats.upsert', () => {
-      console.log('✉️ Got chats', store.chats.all())
-   })
-
-   sock.ev.on('contacts.upsert', () => {
-      console.log('👥 Got contacts', Object.values(store.contacts))
-   })
-
-   // --- Read store from file
-   store.readFromFile(storePath)
-
-   // --- Save store every 3 minutes
-   setInterval(() => {
-      store.writeToFile(storePath)
-   }, 180000)
-}
-
-connectToWhatsApp()
-```
-
-### 🪪 WhatsApp IDs Explain
-
-`id` is the WhatsApp ID, called `jid` and `lid` too, of the person or group you're sending the message to.
-- It must be in the format `[country code][phone number]@s.whatsapp.net`
-   - Example for people: `19999999999@s.whatsapp.net` and `12699999999@lid`.
-   - For groups, it must be in the format `123456789-123345@g.us`.
-- For Meta AI, it's `11111111111@bot`.
-- For broadcast lists, it's `[timestamp of creation]@broadcast`.
-- For stories, the ID is `status@broadcast`.
-
-### ✉️ Sending Messages
-
-> [!NOTE]
-> You can get the `jid` from `message.key.remoteJid` in the first example.
 
 #### 🔠 Text
 
@@ -581,15 +502,6 @@ sock.sendMessage(jid, {
    quoted: message
 })
 ```
-
-#### ✨ Rich Response
-
-> [!NOTE]
-> `richResponse[]` is a representation of [`submessages[]`](https://baileys.wiki/docs/api/namespaces/proto/interfaces/IAIRichResponseSubMessage) inside `richResponseMessage`.
-
-> [!TIP]
-> You can still use the original [`submessages[]`](https://baileys.wiki/docs/api/namespaces/proto/interfaces/IAIRichResponseSubMessage) field directly.
-> The code example below is just an implementation using a helper, not a required structure.
 
 ```javascript
 sock.sendMessage(jid, {
@@ -1685,29 +1597,4 @@ sock.ev.on('newsletter-settings.update', (update) => {})
 sock.ev.on('settings.update', (update) => {})
 ```
 
-### 🚀 Try the Bot
-
-A fast, lightweight, and modular WhatsApp bot built with [@itsmelody/Baileys](https://github.com/Melody-Xz/Baileys).
-Perfect for managing groups, moderating chats, and adding fun with quiz games and handy tools.
-
-👉🏻 [@Melody-Xz/starseed](https://github.com/Melody-Xz/starseed#readme)
-
-### 📦 Fork Base
-
-This fork is based on [Baileys (GitHub)](https://github.com/WhiskeySockets/Baileys)
-
-### 📣 Credits
-
-This project utilizes Protocol Buffer definitions maintained by [WPPConnect](https://github.com/wppconnect-team) through the [`wa-proto`](https://github.com/wppconnect-team/wa-proto) repository.
-
-Full credit is attributed to the original maintainers and contributors of Baileys:
-- [purpshell](https://github.com/purpshell)
-- [jlucaso1](https://github.com/jlucaso1)
-- [adiwajshing](https://github.com/adiwajshing)
-
-This fork includes additional enhancements and modifications by [Melody](https://github.com/Melody-Xz)
-
-Special thanks to [itsreimau](https://github.com/itsreimau) for the fix to the `updateBlockStatus` implementation.
-
-> [!CAUTION]
-> ⚠️ **Modification, removal, or misrepresentation of these credits is strictly prohibited. Any redistribution or fork must preserve this section in its original form without exception.**
+## <div align="center">Powered by Melody Xz ✰</div>
