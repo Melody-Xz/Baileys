@@ -1,4 +1,4 @@
-<div align='center'>@itsmelody/Baileys - API de WhatsApp Web ✰</div>
+## <div align='center'>@itsmelody/Baileys - API de WhatsApp Web ✰</div>
 
 <div align="center">
   <img src="https://cdn.nexylight.xyz/files/01ppdx.jpeg" alt="My Melody" width="300" style="border-radius: 20px;"/>
@@ -7,11 +7,11 @@
 ## Nota Importante
 
 ꕤ Esta librería está basada en Baileys y ha sido editada por Melody para ofrecer máxima velocidad y estabilidad. No está afiliada con WhatsApp.
-> Credits to @itsliaaa 
+> Credits to `@itsliaaa`
 
 ## Aviso de Responsabilidad
 
-@itsmelody/Baileys y su desarrolladora no pueden ser responsables por mal uso. Por favor, usa esta librería para crear cosas lindas y positivas, no para spam o actividades maliciosas.
+@itsmelody/Baileys no pueden ser responsables por mal uso. Por favor, usa esta librería para crear cosas lindas y positivas, no para spam o actividades maliciosas.
 
 ## Instalación
 
